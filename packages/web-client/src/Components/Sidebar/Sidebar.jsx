@@ -44,6 +44,21 @@ const Sidebar = () => {
           <Menu.Item key="6">Team 1</Menu.Item>
           <Menu.Item key="8">Team 2</Menu.Item>
         </SubMenu>
+        <SubMenu key="sub2" icon={<TeamOutlined />} title="Quản lý phụ tùng">
+        <Menu.Item key="/listAccessary">
+            <span>Nhập vật tư phụ tùng</span>
+            <Link to="/import-accessary"></Link>
+          </Menu.Item>
+          <Menu.Item key="/list-accessary">
+            <span>Danh sách phụ tùng</span>
+            <Link to="/list-accessary"></Link>
+          </Menu.Item>
+          <Menu.Item key="/wage">
+            <span>Danh sách tiền công</span>
+            <Link to="/wage"></Link>
+          </Menu.Item>
+         
+        </SubMenu>
         <Menu.Item key="9" icon={<FileOutlined />}>
           Files
         </Menu.Item>
