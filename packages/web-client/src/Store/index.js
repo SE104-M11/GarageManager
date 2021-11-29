@@ -1,4 +1,10 @@
-import LogIn from './logIn';
-import SignUp from './SignUp';
+import thunk from 'redux-thunk'
+import {createStore,applyMiddleware} from 'redux'
+import appReducer from './../Reducers'
 
-export { LogIn, SignUp};
+const store=createStore(
+    appReducer,
+    applyMiddleware(thunk)
+)
+
+export default store;};
