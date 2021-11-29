@@ -30,3 +30,5 @@ npm install
 2. Open the `.env.example` file at `./packages/web-server/.env.example` and copy all its code.
 
 3. Paste that code to `.env` file and configure.
+
+4 . `yarn run server` or `npm run server` to start project.

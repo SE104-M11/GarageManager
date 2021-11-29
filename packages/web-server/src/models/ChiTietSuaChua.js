@@ -7,6 +7,10 @@ exports.initChiTietSuaChua = function(mongoose) {
        require: true,
        unique: true
      },
+     noiDung: {
+       type: String,
+       require: true
+     },
      maVaTu: {
        type:String,
        require: true

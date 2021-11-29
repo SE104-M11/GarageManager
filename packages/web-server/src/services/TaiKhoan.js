@@ -21,4 +21,8 @@ exports.findByID = (id) =>{
     return TaiKhoan.findById(id);
 }
 
+exports.update = (clause,input) =>{
+    return TaiKhoan.updateOne(clause,input);
+}
+
 /* `````````````````````````````````` */

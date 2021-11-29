@@ -1,31 +1,22 @@
+/* eslint-disable no-template-curly-in-string */
+import { CheckCircleOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import {
-  Button,
-  Table,
-  Form,
-  InputNumber,
-  Layout,
   Breadcrumb,
-  Typography,
+  Button,
   Divider,
-  Popconfirm,
-  message,
+  Form,
   Input,
+  InputNumber,
+  message,
+  Popconfirm,
+  Table,
+  Typography,
 } from 'antd';
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { InventoryReportStyles as InventoryReportFormStyles } from './styles';
-import { CheckCircleOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 
-const { Header, Content } = Layout;
 const { Item } = Form;
 const { Title } = Typography;
-const formLayout = {
-  labelCol: {
-    span: 8,
-  },
-  wrapperCol: {
-    span: 8,
-  },
-};
 
 const InventoryReportForm = () => {
   const [showReportResult, setShowReportResult] = useState(false);
@@ -34,6 +25,7 @@ const InventoryReportForm = () => {
     {
       index: 1,
       itemName: 'Toyota',
+      itemAmount: 122,
       itemUsed: 8,
       itemRest: 2,
     },
@@ -106,19 +98,29 @@ const InventoryReportForm = () => {
   ]);
   const columns = [
     {
-      title: '#',
+      title: 'STT',
       dataIndex: 'index',
       key: 'index',
     },
     {
-      title: 'Tên vật phẩm',
+      title: 'Vật tư phụ tùng',
       dataIndex: 'itemName',
       key: 'itemName',
     },
     {
-      title: 'Đã dùng',
+      title: 'Tồn đầu',
+      dataIndex: 'itemAmount',
+      key: 'itemAmount',
+    },
+    {
+      title: 'Phát sinh',
       dataIndex: 'itemUsed',
       key: 'itemUsed',
+    },
+    {
+      title: 'Tồn cuối',
+      dataIndex: 'itemRest',
+      key: 'itemRest',
     },
     {
       title: 'Hành động',
@@ -147,9 +149,18 @@ const InventoryReportForm = () => {
       email: '${label} không phải là email hợp lệ!',
     },
     number: {
-      min: "'${label}' không thể nhỏ hơn ${min}",
-      max: "'${label}' không thể lớn hơn ${max}",
+      min: '${label} không thể nhỏ hơn ${min}',
+      max: '${label} không thể lớn hơn ${max}',
       range: '${label} phải ở giữa ${min} và ${max}',
+    },
+  };
+
+  const formLayout = {
+    labelCol: {
+      span: 8,
+    },
+    wrapperCol: {
+      span: 8,
     },
   };
 
@@ -187,136 +198,133 @@ const InventoryReportForm = () => {
 
   return (
     <InventoryReportFormStyles>
-      <Header className="site-layout-background" style={{ padding: 0 }} />
-      <Content style={{ width: '100%', clear: 'both' }}>
-        <Breadcrumb style={{ margin: '16px 16px' }}>
-          <Breadcrumb.Item>Báo cáo tồn</Breadcrumb.Item>
-          <Breadcrumb.Item>Lập báo cáo tồn</Breadcrumb.Item>
-        </Breadcrumb>
+      <Breadcrumb style={{ margin: '16px 16px' }}>
+        <Breadcrumb.Item>Báo cáo tồn</Breadcrumb.Item>
+        <Breadcrumb.Item>Lập báo cáo tồn</Breadcrumb.Item>
+      </Breadcrumb>
 
-        <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
-          <Title className="main-title" level={2}>
-            Lập báo cáo tồn kho tháng
-          </Title>
-          <Form
-            name="basic"
-            className="filter-form"
-            initialValues={{
-              remember: true,
-            }}
-            onFinish={onFinishCreateTable}
-            onFinishFailed={onFinishFailedCreateTable}
-            autoComplete="off"
-            layout="inline"
-            validateMessages={validateMessages}
+      <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
+        <Title className="main-title" level={2}>
+          Lập báo cáo tồn kho tháng
+        </Title>
+        <Form
+          name="basic"
+          className="filter-form"
+          initialValues={{
+            remember: true,
+          }}
+          onFinish={onFinishCreateTable}
+          onFinishFailed={onFinishFailedCreateTable}
+          autoComplete="off"
+          layout="inline"
+          validateMessages={validateMessages}
+        >
+          <Item
+            label="Tháng"
+            name="month"
+            rules={[
+              {
+                required: true,
+                type: 'number',
+                min: 1,
+                max: 12,
+              },
+            ]}
           >
-            <Item
-              label="Tháng"
-              name="month"
-              rules={[
-                {
-                  required: true,
-                  type: 'number',
-                  min: 1,
-                  max: 12,
-                },
-              ]}
-            >
-              <InputNumber style={{ width: '100%' }} />
-            </Item>
+            <InputNumber style={{ width: '100%' }} />
+          </Item>
 
-            <Item
-              label="Năm"
-              name="year"
-              rules={[
-                {
-                  required: true,
-                  type: 'number',
-                  min: 2000,
-                },
-              ]}
-            >
-              <InputNumber style={{ width: '100%' }} />
-            </Item>
-
-            <Item>
-              <Button type="primary" htmlType="submit">
-                Lập báo cáo tồn
-              </Button>
-            </Item>
-          </Form>
-
-          <Divider />
-          <Form
-            {...formLayout}
-            name="nest-messages"
-            onFinish={onFinishAddItem}
-            validateMessages={validateMessages}
+          <Item
+            label="Năm"
+            name="year"
+            rules={[
+              {
+                required: true,
+                type: 'number',
+                min: 2000,
+              },
+            ]}
           >
-            <Form.Item
-              name="itemName"
-              label="Tên vật phẩm"
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
+            <InputNumber style={{ width: '100%' }} />
+          </Item>
 
-            <Form.Item
-              name="itemUsed"
-              label="Đã dùng"
-              rules={[
-                {
-                  required: true,
-                  type: 'number',
-                  min: 0,
-                },
-              ]}
-            >
-              <InputNumber style={{ width: '50%' }} />
-            </Form.Item>
-
-            <Form.Item
-              name="employeeName"
-              label="Tên nhân viên"
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
-            >
-              <Input style={{ width: '100%' }} />
-            </Form.Item>
-            <Form.Item wrapperCol={{ ...formLayout.wrapperCol, offset: 8 }}>
-              <Button type="primary" htmlType="submit">
-                Thêm vào báo cáo
-              </Button>
-            </Form.Item>
-          </Form>
-
-          <div className={showReportResult ? 'show' : 'hide'}>
-            <Divider plain>Kết quả</Divider>
-            <ResultTitle />
-            <Table
-              className="result-table"
-              columns={columns}
-              dataSource={dataSource}
-              pagination={{ pageSize: 5 }}
-            />
-            <Button
-              className="button-finish"
-              icon={<CheckCircleOutlined />}
-              type="primary"
-              size="middle"
-            >
-              Xác nhận
+          <Item>
+            <Button type="primary" htmlType="submit">
+              Lập báo cáo tồn
             </Button>
-          </div>
+          </Item>
+        </Form>
+
+        <Divider />
+        <Form
+          {...formLayout}
+          name="nest-messages"
+          onFinish={onFinishAddItem}
+          validateMessages={validateMessages}
+        >
+          <Form.Item
+            name="itemName"
+            label="Tên vật phẩm"
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            name="itemUsed"
+            label="Đã dùng"
+            rules={[
+              {
+                required: true,
+                type: 'number',
+                min: 0,
+              },
+            ]}
+          >
+            <InputNumber style={{ width: '50%' }} />
+          </Form.Item>
+
+          <Form.Item
+            name="employeeName"
+            label="Tên nhân viên"
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Input style={{ width: '100%' }} />
+          </Form.Item>
+          <Form.Item wrapperCol={{ ...formLayout.wrapperCol, offset: 8 }}>
+            <Button type="primary" htmlType="submit">
+              Thêm vào báo cáo
+            </Button>
+          </Form.Item>
+        </Form>
+
+        <div className={showReportResult ? 'show' : 'hide'}>
+          <Divider plain>Kết quả</Divider>
+          <ResultTitle />
+          <Table
+            className="result-table"
+            columns={columns}
+            dataSource={dataSource}
+            pagination={{ pageSize: 5 }}
+          />
+          <Button
+            className="button-finish"
+            icon={<CheckCircleOutlined />}
+            type="primary"
+            size="middle"
+          >
+            Xác nhận
+          </Button>
         </div>
-      </Content>
+      </div>
     </InventoryReportFormStyles>
   );
 };

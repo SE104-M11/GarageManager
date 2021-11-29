@@ -16,7 +16,6 @@ import {
 } from 'antd';
 import { CheckCircleOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 
-const { Header, Footer, Content } = AntLayout;
 const { Title, Text } = Typography;
 
 const StyledSaleReportForm = styled(AntLayout)`
@@ -204,150 +203,146 @@ const SaleReportForm = () => {
 
   return (
     <StyledSaleReportForm menuSelectedKey={'sales-report-form'}>
-      <Header className="site-layout-background" style={{ padding: 0 }} />
-      <Content style={{ margin: '0 16px' }}>
-        <Breadcrumb style={{ margin: '16px 0' }}>
-          <Breadcrumb.Item>Báo cáo doanh số</Breadcrumb.Item>
-          <Breadcrumb.Item>Form doanh thu tháng</Breadcrumb.Item>
-        </Breadcrumb>
+      <Breadcrumb style={{ margin: '16px 0' }}>
+        <Breadcrumb.Item>Báo cáo doanh số</Breadcrumb.Item>
+        <Breadcrumb.Item>Form doanh thu tháng</Breadcrumb.Item>
+      </Breadcrumb>
 
-        <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
-          <Title className="main-title" level={2}>
-            Form doanh thu tháng
-          </Title>
-          <Form
-            name="basic"
-            className="filter-form"
-            initialValues={{
-              remember: true,
-            }}
-            onFinish={onFinishCreateTable}
-            onFinishFailed={onFinishFailedCreateTable}
-            autoComplete="off"
-            layout="inline"
-            validateMessages={validateMessages}
+      <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
+        <Title className="main-title" level={2}>
+          Form doanh thu tháng
+        </Title>
+        <Form
+          name="basic"
+          className="filter-form"
+          initialValues={{
+            remember: true,
+          }}
+          onFinish={onFinishCreateTable}
+          onFinishFailed={onFinishFailedCreateTable}
+          autoComplete="off"
+          layout="inline"
+          validateMessages={validateMessages}
+        >
+          <Form.Item
+            label="Tháng"
+            name="month"
+            rules={[
+              {
+                required: true,
+                type: 'number',
+                min: 1,
+                max: 12,
+              },
+            ]}
           >
-            <Form.Item
-              label="Tháng"
-              name="month"
-              rules={[
-                {
-                  required: true,
-                  type: 'number',
-                  min: 1,
-                  max: 12,
-                },
-              ]}
-            >
-              <InputNumber style={{ width: '100%' }} />
-            </Form.Item>
+            <InputNumber style={{ width: '100%' }} />
+          </Form.Item>
 
-            <Form.Item
-              label="Năm"
-              name="year"
-              rules={[
-                {
-                  required: true,
-                  type: 'number',
-                  min: 2000,
-                },
-              ]}
-            >
-              <InputNumber style={{ width: '100%' }} />
-            </Form.Item>
-
-            <Form.Item>
-              <Button type="primary" htmlType="submit">
-                Lập báo cáo doanh thu
-              </Button>
-            </Form.Item>
-          </Form>
-
-          <Divider />
-
-          <Form
-            {...layout}
-            name="nest-messages"
-            onFinish={onFinishAddItem}
-            validateMessages={validateMessages}
+          <Form.Item
+            label="Năm"
+            name="year"
+            rules={[
+              {
+                required: true,
+                type: 'number',
+                min: 2000,
+              },
+            ]}
           >
-            <Form.Item
-              name="carName"
-              label="Mã Hiệu Xe"
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item
-              name="numberRepair"
-              label="Số Lượng Sửa"
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item
-              name="ratio"
-              label="Tỉ Lệ"
-              rules={[
-                {
-                  required: true,
-                  type: 'number',
-                  min: 0,
-                  max: 100,
-                },
-              ]}
-            >
-              <InputNumber style={{ width: '50%' }} />
-            </Form.Item>
-            <Form.Item
-              name="total"
-              label="Tổng Tiền"
-              rules={[
-                {
-                  required: true,
-                  type: 'number',
-                },
-              ]}
-            >
-              <InputNumber style={{ width: '100%' }} />
-            </Form.Item>
-            <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-              <Button type="primary" htmlType="submit">
-                Thêm vào báo cáo
-              </Button>
-            </Form.Item>
-          </Form>
+            <InputNumber style={{ width: '100%' }} />
+          </Form.Item>
 
-          <div className={showReportResult ? 'show' : 'hide'}>
-            <Divider plain>Kết quả</Divider>
-            <ResultTitle />
-            <TotalValues />
-            <Table
-              className="result-table"
-              columns={columns}
-              dataSource={dataSource}
-              pagination={false}
-            />
-            <Button
-              className="button-finish"
-              icon={<CheckCircleOutlined />}
-              type="primary"
-              size="middle"
-            >
-              Xác nhận
+          <Form.Item>
+            <Button type="primary" htmlType="submit">
+              Lập báo cáo doanh thu
             </Button>
-          </div>
+          </Form.Item>
+        </Form>
+
+        <Divider />
+
+        <Form
+          {...layout}
+          name="nest-messages"
+          onFinish={onFinishAddItem}
+          validateMessages={validateMessages}
+        >
+          <Form.Item
+            name="carName"
+            label="Mã Hiệu Xe"
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="numberRepair"
+            label="Số Lượng Sửa"
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="ratio"
+            label="Tỉ Lệ"
+            rules={[
+              {
+                required: true,
+                type: 'number',
+                min: 0,
+                max: 100,
+              },
+            ]}
+          >
+            <InputNumber style={{ width: '50%' }} />
+          </Form.Item>
+          <Form.Item
+            name="total"
+            label="Tổng Tiền"
+            rules={[
+              {
+                required: true,
+                type: 'number',
+              },
+            ]}
+          >
+            <InputNumber style={{ width: '100%' }} />
+          </Form.Item>
+          <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+            <Button type="primary" htmlType="submit">
+              Thêm vào báo cáo
+            </Button>
+          </Form.Item>
+        </Form>
+
+        <div className={showReportResult ? 'show' : 'hide'}>
+          <Divider plain>Kết quả</Divider>
+          <ResultTitle />
+          <TotalValues />
+          <Table
+            className="result-table"
+            columns={columns}
+            dataSource={dataSource}
+            pagination={false}
+          />
+          <Button
+            className="button-finish"
+            icon={<CheckCircleOutlined />}
+            type="primary"
+            size="middle"
+          >
+            Xác nhận
+          </Button>
         </div>
-      </Content>
-      <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+      </div>
     </StyledSaleReportForm>
   );
 };

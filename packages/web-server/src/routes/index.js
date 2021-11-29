@@ -14,6 +14,8 @@ const AccessoryImportFormRouter = require('./AccessoryImportForm');
 const InventoryReportRouter = require('./InventoryReport');
 const PhieuThuTien = require('./PhieuThuTien');
 const DoanhSo = require('./DoanhSo');
+const PhieuTiepNhan = require('./PhieuTIepNhan');
+const PhieuSuaChua = require('./PhieuSuaChua');
 
 const route = (app) => {
     app.use('/api/bills', BillRouter);
@@ -22,7 +24,7 @@ const route = (app) => {
     app.use('/api/hieuxes', HieuXeRouter);
     app.use('/api/chitietdoanhsos', ChiTietDoanhSoRouter);
     app.use('/api/taikhoans', TaiKhoanRouter);
-    app.use('/api/quydinhs',isAdminAuth, QuyDinhRouter);
+    app.use('/api/quydinhs', QuyDinhRouter);
     app.use('/api/loaivattus', LoaiVatTuRouter);
     app.use('/api/wages', WageRouter);
     app.use('/api/parameters', ParameterRouter);
@@ -31,6 +33,8 @@ const route = (app) => {
     app.use('/api/inventory-reports', InventoryReportRouter);
     app.use('/api/phieuthutiens', PhieuThuTien);
     app.use('/api/doanhsos', DoanhSo);
+    app.use('/api/phieutiepnhan', PhieuTiepNhan);
+    app.use('/api/phieusuachua', PhieuSuaChua);
 }
 
 

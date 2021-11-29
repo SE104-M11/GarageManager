@@ -89,6 +89,10 @@ const create = async (req, res) => {
         newInventoryReportDetailObj.openingStock = newInventoryReportDetailObj.endingStock + numberOfProductSold - newInventoryReportDetailObj.arising;
         newInventoryReportDetailObjList.push(newInventoryReportDetailObj);
     })
+
+    if(accessoryImportListInThisMonth.length === 0) {
+        newInventoryReportDetailObjList = []
+    }
     
     // save inventory report details and update inventory report
     for (let i = 0; i < newInventoryReportDetailObjList.length; i++) {
