@@ -4,11 +4,6 @@ exports.initPhieuTiepNhan = function(mongoose) {
     
         // Create Bill Schema
         const PhieuTiepNhanSchema = new Schema({
-            maPTN: {
-                type:String,
-                require: true,
-                unique: true
-            },
             maXe: {
                 type:String,
                 require: true

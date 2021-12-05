@@ -38,6 +38,7 @@ const create = async (req, res) => {
                 ...data,
                 maLoaiVatTu
             };
+            
 
             await LoaiVatTuService.create(newLoaiVatTu);
             return res.status(200).json(successResponse("Tạo thành công"));
@@ -57,7 +58,8 @@ const getAll = async (req, res) => {
         var listLoaiVatTu=await LoaiVatTuService.findAll();
         listLoaiVatTu=listLoaiVatTu.map((item)=>{
             return {maLoaiVatTu:item.maLoaiVatTu,
-                    tenLoaiVatTu:item.tenLoaiVatTu}
+                    tenLoaiVatTu:item.tenLoaiVatTu,
+                    idVatTu: item._id}
         })
         
         return res.status(200).json(

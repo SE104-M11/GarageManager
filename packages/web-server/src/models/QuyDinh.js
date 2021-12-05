@@ -10,10 +10,6 @@ exports.initQuyDinh = function(mongoose) {
      soXeMax: {
        type:Number,
        require: true
-     },
-     soLoaiTienCong: {
-      type:Object,
-       require: true
      }
   })
 

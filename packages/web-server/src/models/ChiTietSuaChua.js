@@ -2,10 +2,9 @@ exports.initChiTietSuaChua = function(mongoose) {
   const Schema = mongoose.Schema;
 
   const ChiTietSuaChuaSchema = new Schema({
-     maCTSC: {
-       type:String,
-       require: true,
-       unique: true
+    noiDung: {
+       type: String,
+       require: true
      },
      maVaTu: {
        type:String,
@@ -24,7 +23,7 @@ exports.initChiTietSuaChua = function(mongoose) {
        require: true
      },
      maPSC: {
-       type:Number,
+       type: String,
        require: true
      }
   })

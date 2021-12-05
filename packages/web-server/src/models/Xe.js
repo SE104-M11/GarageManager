@@ -4,10 +4,6 @@ const Schema = mongoose.Schema;
 
     // Create Bill Schema
     const XeSchema = new Schema({
-        maXe: {
-            type:String,
-            unique: true
-        },
         maKhachHang: {
             type:String,
         },

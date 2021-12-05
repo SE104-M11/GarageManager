@@ -24,6 +24,16 @@ const searchName = async (req, res) => {
 
 const create = async (req, res) => {
     let input = req.body;
+    console.log(input)
+    if (input.remaining) {
+        delete input['remaining'];
+    }
+
+    if(!input.price || input.price < 0)
+        return res.status(400).send({
+            statusCode: 400,
+            message: 'Unit price cannot be less than 0'
+        })
 
     // create new accessory
     try {

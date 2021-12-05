@@ -4,10 +4,6 @@ exports.initKhachHang = function(mongoose) {
 
     // Create Bill Schema
     const KhachHangSchema = new Schema({
-        maKhachHang: {
-            type:String,
-            unique: true
-        },
         tenKhachHang:{
             type:String
         },

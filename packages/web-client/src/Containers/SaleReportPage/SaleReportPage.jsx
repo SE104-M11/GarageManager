@@ -13,8 +13,8 @@ import {
   Table,
 } from 'antd';
 import { DownloadOutlined } from '@ant-design/icons';
+import axios from 'axios';
 
-const { Header, Footer, Content } = AntLayout;
 const { Title, Text } = Typography;
 
 const StyledSaleReportPage = styled(AntLayout)`
@@ -137,6 +137,11 @@ const SaleReportPage = () => {
   const onFinishCreateTable = (values) => {
     const { month, year } = values;
     setDateData({ ...dateData, month: month, year: year });
+    // axios.get(`http://localhost:5000/api/doanhsos?month=${month}&year=${year}`);
+    axios
+      .get(`http://localhost:5000/api/chitietdoanhsos?maDoanhSo=61951d84609a0e7842149340`)
+      .then((data) => console.log(data))
+      .catch((err) => console.error('Error: ', err));
     setShowReportResult(true);
   };
 
@@ -158,88 +163,84 @@ const SaleReportPage = () => {
 
   return (
     <StyledSaleReportPage menuSelectedKey={'sales-report-page'}>
-      <Header className="site-layout-background" style={{ padding: 0 }} />
-      <Content style={{ margin: '0 16px' }}>
-        <Breadcrumb style={{ margin: '16px 0' }}>
-          <Breadcrumb.Item>Báo cáo doanh số</Breadcrumb.Item>
-          <Breadcrumb.Item>Báo cáo doanh thu tháng</Breadcrumb.Item>
-        </Breadcrumb>
+      <Breadcrumb style={{ margin: '16px 0' }}>
+        <Breadcrumb.Item>Báo cáo doanh số</Breadcrumb.Item>
+        <Breadcrumb.Item>Báo cáo doanh thu tháng</Breadcrumb.Item>
+      </Breadcrumb>
 
-        <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
-          <Title className="main-title" level={2}>
-            Báo cáo doanh thu tháng
-          </Title>
+      <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
+        <Title className="main-title" level={2}>
+          Báo cáo doanh thu tháng
+        </Title>
 
-          <Form
-            name="basic"
-            className="filter-form"
-            initialValues={{
-              remember: true,
-            }}
-            onFinish={onFinishCreateTable}
-            onFinishFailed={onFinishFailedCreateTable}
-            autoComplete="off"
-            layout="inline"
-            validateMessages={validateMessages}
+        <Form
+          name="basic"
+          className="filter-form"
+          initialValues={{
+            remember: true,
+          }}
+          onFinish={onFinishCreateTable}
+          onFinishFailed={onFinishFailedCreateTable}
+          autoComplete="off"
+          layout="inline"
+          validateMessages={validateMessages}
+        >
+          <Form.Item
+            label="Tháng"
+            name="month"
+            rules={[
+              {
+                required: true,
+                type: 'number',
+                min: 1,
+                max: 12,
+              },
+            ]}
           >
-            <Form.Item
-              label="Tháng"
-              name="month"
-              rules={[
-                {
-                  required: true,
-                  type: 'number',
-                  min: 1,
-                  max: 12,
-                },
-              ]}
-            >
-              <InputNumber style={{ width: '100%' }} />
-            </Form.Item>
+            <InputNumber style={{ width: '100%' }} />
+          </Form.Item>
 
-            <Form.Item
-              label="Năm"
-              name="year"
-              rules={[
-                {
-                  required: true,
-                  type: 'number',
-                  min: 2000,
-                },
-              ]}
-            >
-              <InputNumber style={{ width: '100%' }} />
-            </Form.Item>
+          <Form.Item
+            label="Năm"
+            name="year"
+            rules={[
+              {
+                required: true,
+                type: 'number',
+                min: 2000,
+              },
+            ]}
+          >
+            <InputNumber style={{ width: '100%' }} />
+          </Form.Item>
 
-            <Form.Item>
-              <Button type="primary" htmlType="submit">
-                Xem báo cáo doanh thu
-              </Button>
-            </Form.Item>
-          </Form>
-
-          <div className={showReportResult ? 'show' : 'hide'}>
-            <Divider plain>Kết quả</Divider>
-            <ResultTitle />
-            <TotalValues />
-            <Table
-              className="result-table"
-              columns={columns}
-              dataSource={dataSource}
-              pagination={false}
-            />
-            <Button
-              className="button-finish"
-              icon={<DownloadOutlined />}
-              type="primary"
-              size="middle"
-            >
-              In báo cáo doanh thu
+          <Form.Item>
+            <Button type="primary" htmlType="submit">
+              Xem báo cáo doanh thu
             </Button>
-          </div>
+          </Form.Item>
+        </Form>
+
+        <div className={showReportResult ? 'show' : 'hide'}>
+          <Divider plain>Kết quả</Divider>
+          <ResultTitle />
+          <TotalValues />
+          <Table
+            className="result-table"
+            columns={columns}
+            dataSource={dataSource}
+            pagination={false}
+          />
+          <Button
+            className="button-finish"
+            icon={<DownloadOutlined />}
+            type="primary"
+            size="middle"
+          >
+            In báo cáo doanh thu
+          </Button>
         </div>
-      </Content>
-      <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+      </div>
     </StyledSaleReportPage>
   );
 };

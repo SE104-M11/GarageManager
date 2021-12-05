@@ -1,6 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const { find, create, findOne, update, deleteOne } = require('../controllers/Bill');
+const {
+  find,
+  create,
+  findOne,
+  update,
+  deleteOne,
+} = require('../controllers/Bill');
 
 /* GET find by id list */
 router.get('/:id', findOne);
@@ -16,6 +22,5 @@ router.put('/:id', update);
 
 /* DELETE */
 router.delete('/:id', deleteOne);
-
 
 module.exports = router;

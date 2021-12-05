@@ -12,6 +12,10 @@ exports.initTaiKhoan = function(mongoose) {
           type:String,
           require: true
       },
+      status: {
+        type:Number,
+        require: true
+    },
       matKhau: {
         type:String,
         require: true

@@ -4,11 +4,6 @@ exports.initPhieuSuaChua = function(mongoose) {
     
         // Create Bill Schema
         const PhieuSuaChuaSchema = new Schema({
-            maPSC: {
-                type:String,
-                require: true,
-                unique: true
-            },
             maPTN: {
                 type:String,
                 require: true

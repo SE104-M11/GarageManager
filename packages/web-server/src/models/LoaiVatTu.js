@@ -4,8 +4,6 @@ exports.initLoaiVatTu = function(mongoose) {
     const LoaiVatTuSchema = new Schema({
        maLoaiVatTu: {
          type:String,
-         require: true,
-         unique: true
        },
        tenLoaiVatTu: {
          type:String,
