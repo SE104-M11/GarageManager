@@ -1,3 +1,4 @@
+/* eslint-disable no-template-curly-in-string */
 import { CheckCircleOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import {
   Breadcrumb,

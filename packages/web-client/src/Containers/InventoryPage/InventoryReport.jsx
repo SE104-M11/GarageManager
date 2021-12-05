@@ -70,7 +70,6 @@ const InventoryReport = () => {
     setShowReportResult(true);
   };
 
-
   const onFinishFailedCreateTable = (errorInfo) => {
     console.log('Failed:', errorInfo);
     setShowReportResult(false);

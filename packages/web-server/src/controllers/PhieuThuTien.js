@@ -12,6 +12,13 @@ const create = async (req, res) => {
       message: 'Your bienSo is null/empty',
     });
   }
+    // If input is null, return 400 Error
+    if (!formInput.bienSo) {
+        return res.status(400).json({
+            statusCode: 400,
+            message: 'Your bienSo is null/empty'
+        });
+    }
 
   if (!formInput.ngayTT) {
     return res.status(400).json({

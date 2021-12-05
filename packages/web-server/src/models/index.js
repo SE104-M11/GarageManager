@@ -40,9 +40,10 @@ db.Wage = initWage(mongoose);
 db.InventoryReport = initInventoryReport(mongoose);
 db.InventoryReportDetail = initInventoryReportDetail(mongoose);
 db.Parameter = initParameter(mongoose);
-db.PhieuTiepNhan = initPhieuTiepNhan(mongoose);
-db.PhieuSuaChua = initPhieuSuaChua(mongoose);
-db.PhieuThuTien = initPhieuThuTien(mongoose);
-db.DoanhSo = initDoanhSo(mongoose);
+db.PhieuTiepNhan = initPhieuTiepNhan(mongoose)
+db.PhieuSuaChua = initPhieuSuaChua(mongoose)
+db.PhieuThuTien = initPhieuThuTien(mongoose)
+db.DoanhSo = initDoanhSo(mongoose)
+
 
 module.exports = db;
