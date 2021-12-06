@@ -10,7 +10,7 @@ const createOne = async (req, res) => {
   var today = new Date();
   var date = today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear();
 
-  //  Truy xuat vao bang loai vat tu va tien cong de lat maVT va maTC
+  // //  Truy xuat vao bang loai vat tu va tien cong de lat maVT va maTC
   await Accessory.findOne({ name: nameLoaiVatTu }).then(res => {
     maVT = res;
   }).catch(err => {console.log()});
@@ -53,7 +53,7 @@ const createOne = async (req, res) => {
   await newCTSC.save().then((res) => {
     console.log("CTSC: ", res);
   })
-  
+ 
   // await ChiTietSuaChua.remove({});
   // await PhieuSuaChua.remove({});
   // await ChiTietSuaChua.find({}).then(res => {
@@ -64,6 +64,7 @@ const createOne = async (req, res) => {
   // });
 
   // cập nhât số lượng sửa trong chi tiết doanh số
+  today = new Date(date);
   let { maHieuXe } = await Xe.findOne({ bienSo }, { maHieuXe: 1 });
   let ds = await DoanhSo.aggregate([{$project: { month: {$month: '$ThoiDiemDS'}, year: { $year: '$ThoiDiemDS'}, tongDS: 1}}, 
     {$match: { month: today.getMonth() + 1, year: today.getFullYear()}}]);
